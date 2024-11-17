@@ -1,6 +1,6 @@
 package com.ns.task.service;
 
-import com.com.ns.task.GDBankApplication;
+import com.ns.task.GDBankApplication;
 import com.ns.task.bean.AccountStatus;
 import com.ns.task.bean.AccountType;
 import com.ns.task.bean.BankAccount;

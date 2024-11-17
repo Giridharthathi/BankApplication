@@ -8,7 +8,7 @@ import com.ns.task.exception.WithdrawException;
 
 import java.util.Scanner;
 
-import static com.com.ns.task.GDBankApplication.bankAccountDetails;
+import static com.ns.task.GDBankApplication.bankAccountDetails;
 
 public sealed interface IAccount permits CurrentAccount,PremiumAccount, SavingsAccount{
     Scanner scanner = new Scanner(System.in);

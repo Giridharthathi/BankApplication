@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import static com.com.ns.task.GDBankApplication.bankAccountDetails;
+import static com.ns.task.GDBankApplication.bankAccountDetails;
 
 public class FileService {
     private static final String FILE_PATH ="C:\\Users\\gthathireddy\\OneDrive - NextSphere Technologies\\SelfDevelopment\\BankApplication\\src\\BankAccounts.txt";

@@ -1,6 +1,6 @@
 package com.ns.task.service;
 
-import com.com.ns.task.GDBankApplication;
+import com.ns.task.GDBankApplication;
 import com.ns.task.account.CurrentAccount;
 import com.ns.task.account.IAccount;
 import com.ns.task.account.PremiumAccount;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static com.com.ns.task.GDBankApplication.bankAccountDetails;
+import static com.ns.task.GDBankApplication.bankAccountDetails;
 import static com.ns.task.account.IAccount.*;
 
 public class BankOperation {

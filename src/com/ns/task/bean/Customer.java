@@ -1,8 +1,8 @@
 package com.ns.task.bean;
 
-import java.util.Comparator;
+import java.io.Serializable;
 
-public class Customer {
+public class Customer implements Serializable {
     private String name;
     private String mail;
     private Long phoneNumber;

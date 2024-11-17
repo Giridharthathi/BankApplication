@@ -6,7 +6,7 @@ import com.ns.task.exception.WithdrawException;
 
 import java.math.BigDecimal;
 
-import static com.com.ns.task.GDBankApplication.bankAccountDetails;
+import static com.ns.task.GDBankApplication.bankAccountDetails;
 
 public final class CurrentAccount implements IAccount {
     private static final double OVERDRAFT_LIMIT = 500000.0;
