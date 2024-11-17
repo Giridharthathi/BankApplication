@@ -1,5 +1,7 @@
 package com.ns.task.bean;
 
+import java.util.Comparator;
+
 public class Customer {
     private String name;
     private String mail;

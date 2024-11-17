@@ -1,14 +1,14 @@
 package com.ns.task.account;
 
-import com.ns.task.exception.AccountException;
-import com.ns.task.exception.WithdrawException;
-import com.ns.task.bean.Customer;
 import com.ns.task.bean.AccountStatus;
 import com.ns.task.bean.AccountType;
+import com.ns.task.bean.Customer;
+import com.ns.task.exception.AccountException;
+import com.ns.task.exception.WithdrawException;
 
 import java.math.BigDecimal;
 
-import static com.ns.task.GDBankApplication.bankAccountDetails;
+import static com.com.ns.task.GDBankApplication.bankAccountDetails;
 
 public final class PremiumAccount implements IAccount {
     public PremiumAccount() {
@@ -27,6 +27,7 @@ public final class PremiumAccount implements IAccount {
                             customerAccounts.getAccount().setAmount(BigDecimal.valueOf(totalAmount));
                             System.out.println("Amount has been withdrawn of Rs:" + amountToWithdraw + "from accountNumber" +
                                     accountNumber);
+                            break;
                         } else {
                             throw new WithdrawException("You should enter the amount less then your account");
                         }
@@ -50,6 +51,7 @@ public final class PremiumAccount implements IAccount {
                 customerDetail.getAccount().setAmount(BigDecimal.valueOf(totalAmount));
                 if (customerDetail.getAccount().getAccountType() == AccountType.PREMIUM && depositAmount >= 10000) {
                     customerDetail.getAccount().setLoyaltyPoints(customerDetail.getAccount().getLoyaltyPoints() + 10);
+                    break;
                 }
             }
         }

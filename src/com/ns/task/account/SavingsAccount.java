@@ -1,14 +1,13 @@
 package com.ns.task.account;
 
-import com.ns.task.exception.AccountException;
-import com.ns.task.exception.WithdrawException;
-import com.ns.task.bean.Customer;
-import com.ns.task.GDBankApplication;
+import com.com.ns.task.GDBankApplication;
 import com.ns.task.bean.AccountStatus;
 import com.ns.task.bean.AccountType;
+import com.ns.task.bean.Customer;
+import com.ns.task.exception.AccountException;
+import com.ns.task.exception.WithdrawException;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +21,7 @@ public final class SavingsAccount implements IAccount {
         boolean accountFound = false;
             for (Customer customerAccounts : bankAccountDetails) {
                 if (accountNumber.equals(customerAccounts.getAccount().getAccountNumber())) {
-
                     accountFound = true;
-
                     if (customerAccounts.getAccount().isStatus() == AccountStatus.ACTIVE) {
 
                         if (customerAccounts.getAccount().getAmount().compareTo(BigDecimal.valueOf(amountToWithdraw))>0 &&
@@ -44,11 +41,10 @@ public final class SavingsAccount implements IAccount {
                                 customerAccounts.getAccount().setWithdrawAttempts(totalWithdrawAttempts);
 
                                 customerAccounts.getAccount().setWithdrawAttempts(totalWithdrawAttempts);
+                                break;
                             } else {
                                 throw  new WithdrawException("You exceeded your withdraw limit");
                             }
-
-
                         } else {
                             throw new WithdrawException("You should enter the amount less then your account balance" +
                                     "(OR) Please enter amount above your account type limit");
@@ -64,8 +60,8 @@ public final class SavingsAccount implements IAccount {
     }
 
     public void deposit(String accountNumber, double depositAmount) {
-
         boolean accountFound = false;
+
         for (Customer customerDetail : bankAccountDetails) {
             if (accountNumber.equals(customerDetail.getAccount().getAccountNumber())) {
                 accountFound = true;
@@ -73,6 +69,7 @@ public final class SavingsAccount implements IAccount {
                 customerDetail.getAccount().setAmount(BigDecimal.valueOf(totalAmount));
                 if (customerDetail.getAccount().getAccountType() == AccountType.PREMIUM && depositAmount >= 10000) {
                     customerDetail.getAccount().setLoyaltyPoints(customerDetail.getAccount().getLoyaltyPoints() + 10);
+                    break;
                 }
             }
         }

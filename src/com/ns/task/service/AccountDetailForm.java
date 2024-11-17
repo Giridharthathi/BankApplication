@@ -1,6 +1,6 @@
 package com.ns.task.service;
 
-import com.ns.task.GDBankApplication;
+import com.com.ns.task.GDBankApplication;
 import com.ns.task.bean.AccountStatus;
 import com.ns.task.bean.AccountType;
 import com.ns.task.bean.BankAccount;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountDetailForm {
-    private static final String FILE_PATH = "src\\BankAccounts.txt";
+    private static final String FILE_PATH = "C:\\Users\\gthathireddy\\OneDrive - NextSphere Technologies\\SelfDevelopment\\BankApplication\\src\\BankAccounts.txt";
     private AccountType accountType;
     private String accountNumber;
     private BigDecimal depositAmount;
@@ -71,7 +71,6 @@ public class AccountDetailForm {
             bankAccount.setAccountType(accountType);
             bankAccount.setStatus(AccountStatus.ACTIVE);
             bankAccount.setLoyaltyPoints(0);
-
 
             customerBankAccount.setAccount(bankAccount);//adding account to customer class
             bankAccountDetails.add(customerBankAccount);// adding bank details to list

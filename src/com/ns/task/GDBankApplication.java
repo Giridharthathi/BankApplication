@@ -7,8 +7,7 @@ import com.ns.task.account.SavingsAccount;
 import com.ns.task.bean.AccountType;
 import com.ns.task.exception.WithdrawException;
 import com.ns.task.bean.Customer;
-import com.ns.task.fileManager.GetFileData;
-import com.ns.task.fileManager.WriteToFile;
+import com.ns.task.fileManager.FileService;
 import com.ns.task.service.AccountDetailForm;
 import com.ns.task.service.BankOperation;
 
@@ -18,23 +17,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GDBankApplication {
-    private static final Scanner scanner = new Scanner(System.in);
-    public static final WriteToFile writeUpdatedDataToFile = new WriteToFile();
-    public static final List<Customer> bankAccountDetails = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+    public static final BankOperation bankOperation;
+    public static final FileService fileService ;
+    public static final List<Customer> bankAccountDetails;
+
+    static {
+        bankOperation = new BankOperation();
+        fileService = new FileService();
+        bankAccountDetails = new ArrayList<>();
+    }
+
 
 
     public static void main(String[] args) throws IOException, WithdrawException {
-        GetFileData getFileData = new GetFileData();
+        FileService getFileData = new FileService();
         getFileData.getDataFromFileAndAddToList();
 
         new GDBankApplication().selectOperation();
     }
 
-    public void selectOperation() throws WithdrawException, IOException {
-        String continueOperation = "Y";
-        BankOperation bankOperation = new BankOperation();
-        do {
-            System.out.print("""
+    private void printMenu(){
+        System.out.print("""
                     Select the operation to continue:
                     1.Open Account\s
                     2.Withdraw\s
@@ -44,6 +48,15 @@ public class GDBankApplication {
                     6.Activate Account\s
                     7.Get All Customer\s
                     8.End Operation""");
+    }
+    private double amountInput(){
+        System.out.print("Enter amount to deposit");
+        return scanner.nextDouble();
+    }
+    public void selectOperation() throws WithdrawException, IOException {
+        String continueOperation = "Y";
+        do {
+            printMenu();
             String operation = scanner.next();
 
             switch (operation) {
@@ -52,29 +65,44 @@ public class GDBankApplication {
                     accountDetailForm.takingAccountDetails();
                 }
                 case "2" -> bankOperation.withDraw();
-                case "3" -> bankOperation.deposit();
+
+                case "3" -> {
+                    IAccount account = null;
+                    System.out.println("To see your account details enter your account number");
+                    String accountNumber = scanner.next();
+                    AccountType accountType = bankOperation.findAccountTypeByNumber(accountNumber);
+                    System.out.print("Enter amount to deposit");
+                    double amountInput = scanner.nextDouble();
+                    switch (accountType) {
+                        case PREMIUM ->
+                            account = new PremiumAccount();
+                        case CURRENT ->
+                            account = new CurrentAccount();
+                        case SAVINGS ->
+                            account = new SavingsAccount();
+                    }
+                    account.deposit(accountNumber, amountInput);
+                }
                 case "4" -> {
                     System.out.println("To see your account details enter your account number");
                     String accountNumber = scanner.next();
                     System.out.println(bankOperation.findAccountDetails(accountNumber));
-
                 }
                 case "5" -> {
                     System.out.println("Enter the account number to IDLE");
                     String accountNumber = scanner.next();
                     IAccount.idleTheAccount(accountNumber);
-                    writeUpdatedDataToFile.writeUpdatedData();
                 }
                 case "6" -> {
                     System.out.println("Enter the account number to ACTIVATE");
                     String accountNumber = scanner.next();
                     IAccount.activateTheAccount(accountNumber);
-                    writeUpdatedDataToFile.writeUpdatedData();
                 }
                 case "7" -> bankOperation.getAllCustomerDetails();
                 case "8" -> continueOperation = "N";
                 default ->  System.err.println("Not a valid Response");
             }
         } while (continueOperation.equalsIgnoreCase("Y"));
+        fileService.writeUpdatedData();
     }
 }

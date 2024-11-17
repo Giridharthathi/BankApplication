@@ -8,7 +8,7 @@ import com.ns.task.exception.WithdrawException;
 
 import java.util.Scanner;
 
-import static com.ns.task.GDBankApplication.bankAccountDetails;
+import static com.com.ns.task.GDBankApplication.bankAccountDetails;
 
 public sealed interface IAccount permits CurrentAccount,PremiumAccount, SavingsAccount{
     Scanner scanner = new Scanner(System.in);
@@ -20,7 +20,7 @@ public sealed interface IAccount permits CurrentAccount,PremiumAccount, SavingsA
     static final double PREMIUM_MIN_BALANCE = 100000;
 
     void withDraw(String accountNumber, double amountToWithdraw) throws WithdrawException;
-    void deposit(String accountNumber, double depositAmount);
+    void deposit(String accountNumber, double amount);
 
     static void idleTheAccount(String accountNumber) {
         boolean accountFound = false;
