@@ -18,7 +18,7 @@ import java.util.List;
 import static com.ns.task.GDBankApplication.bankAccountDetails;
 
 public class FileService {
-    private static final String FILE_PATH ="C:\\Users\\gthathireddy\\OneDrive - NextSphere Technologies\\SelfDevelopment\\BankApplication\\src\\BankAccounts.txt";
+    private static final String FILE_PATH ="src\\BankAccounts.txt";
 
     public void getDataFromFileAndAddToList() throws IOException {
         Customer customer;

@@ -1,9 +1,10 @@
 package com.ns.task.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class BankAccount {
+public class BankAccount implements Serializable {
     private String accountNumber;
     private BigDecimal amount;
     private AccountStatus status;

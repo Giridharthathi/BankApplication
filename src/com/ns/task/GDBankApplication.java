@@ -10,22 +10,22 @@ import com.ns.task.bean.Customer;
 import com.ns.task.fileManager.FileService;
 import com.ns.task.service.AccountDetailForm;
 import com.ns.task.service.BankOperation;
+import com.ns.task.util.Common;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class GDBankApplication {
-    static Scanner scanner = new Scanner(System.in);
-    public static final BankOperation bankOperation;
-    public static final FileService fileService ;
+    private static final Scanner scanner = Common.scannerObject();
+    private static final BankOperation bankOperation;
+    private static final FileService fileService ;
     public static final List<Customer> bankAccountDetails;
 
     static {
         bankOperation = new BankOperation();
         fileService = new FileService();
-        bankAccountDetails = new ArrayList<>();
+        bankAccountDetails = Common.listObject();
     }
 
 
@@ -49,11 +49,13 @@ public class GDBankApplication {
                     7.Get All Customer\s
                     8.End Operation""");
     }
+
     private double amountInput(){
         System.out.print("Enter amount to deposit");
         return scanner.nextDouble();
     }
-    public void selectOperation() throws WithdrawException, IOException {
+
+    public void selectOperation() throws WithdrawException, IOException, NullPointerException {
         String continueOperation = "Y";
         do {
             printMenu();
@@ -67,13 +69,15 @@ public class GDBankApplication {
                 case "2" -> bankOperation.withDraw();
 
                 case "3" -> {
-                    IAccount account = null;
+
                     System.out.println("To see your account details enter your account number");
                     String accountNumber = scanner.next();
                     AccountType accountType = bankOperation.findAccountTypeByNumber(accountNumber);
                     System.out.print("Enter amount to deposit");
                     double amountInput = scanner.nextDouble();
+                    IAccount account = null;
                     switch (accountType) {
+
                         case PREMIUM ->
                             account = new PremiumAccount();
                         case CURRENT ->

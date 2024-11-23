@@ -9,6 +9,7 @@ import com.ns.task.bean.AccountType;
 import com.ns.task.bean.Customer;
 import com.ns.task.exception.AccountException;
 import com.ns.task.exception.WithdrawException;
+import com.ns.task.util.Common;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,7 +21,7 @@ import static com.ns.task.GDBankApplication.bankAccountDetails;
 import static com.ns.task.account.IAccount.*;
 
 public class BankOperation {
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = Common.scannerObject();
     private IAccount account;
 
     public void withDraw() throws WithdrawException {

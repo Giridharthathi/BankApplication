@@ -5,6 +5,7 @@ import com.ns.task.bean.AccountStatus;
 import com.ns.task.bean.AccountType;
 import com.ns.task.bean.BankAccount;
 import com.ns.task.bean.Customer;
+import com.ns.task.util.Common;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -17,12 +18,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountDetailForm {
-    private static final String FILE_PATH = "C:\\Users\\gthathireddy\\OneDrive - NextSphere Technologies\\SelfDevelopment\\BankApplication\\src\\BankAccounts.txt";
+    private static final String FILE_PATH = "src\\BankAccounts.txt";
     private AccountType accountType;
     private String accountNumber;
     private BigDecimal depositAmount;
     Long phone;
-    static Scanner scanner = new Scanner(System.in);
+    Scanner scanner = Common.scannerObject();
 
     List<Customer> bankAccountDetails = GDBankApplication.bankAccountDetails;
 
